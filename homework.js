@@ -19,8 +19,8 @@ const server = http.createServer((req, res) => {
   // req.url -- get url
   try{ 
 
-    console.log(asdl); // try to call some error
 
+    //console.log(asdl); // try to call some error
 
     // d route
     if (req.url === '/d' || req.url.startsWith('/d?')) {
