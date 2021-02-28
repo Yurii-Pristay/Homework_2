@@ -1,6 +1,7 @@
 const http = require('http');
 
 const DCrud = require('./dCrud');
+const ECrud = require('./eRouting')
 
 const hostname = '127.0.0.1';
 const port = 3000;
@@ -16,7 +17,6 @@ const dbArray = [
 const server = http.createServer((req, res) => {
   // req.method -- get method
   // req.url -- get url
-
 
   // d route
   if (req.url === '/d' || req.url.startsWith('/d?')) {
@@ -35,7 +35,16 @@ const server = http.createServer((req, res) => {
       d.delete(req, res);
     }
   }
-});
+
+  // e routing
+  if (req.url === '/e' || req.url.startsWith('/e?')) {
+    res.writeHead(200, { 'Content-Type': 'application/json', })
+    const e = new ECrud(dbArray, req)
+    e.routing(req,res)
+  }
+  
+})
+
 
 server.listen(port, hostname, () => {
   console.log(`Server running at http://${hostname}:${port}/`);
