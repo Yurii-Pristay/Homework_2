@@ -2,6 +2,7 @@ const http = require('http');
 
 const DCrud = require('./dCrud');
 const ECrud = require('./eRouting')
+const CCrud = require('./nastiiaCrud');
 
 const hostname = '127.0.0.1';
 const port = 3000;
@@ -19,8 +20,9 @@ const server = http.createServer((req, res) => {
   // req.url -- get url
   try{ 
 
-
+    
     //console.log(asdl); // try to call some error
+
 
     // d route
     if (req.url === '/d' || req.url.startsWith('/d?')) {
@@ -46,6 +48,27 @@ const server = http.createServer((req, res) => {
       const e = new ECrud(dbArray, req)
       e.routing(req,res)
     }
+
+    // c CRUD
+
+    if (req.url === '/c' || req.url.startsWith('/c?')) {
+      const c = new CCrud(dbArray, req);
+      res.writeHead(200, {
+        'Content-Type': 'application/json',
+      });
+
+      if (req.method === 'GET') {
+        c.read(req, res);
+      } else if (req.method === 'POST') {
+        c.create(req, res);
+      } else if (req.method === 'PUT') {
+        c.update(req, res);
+      } else if (req.method === 'DELETE') {
+        c.delete(req, res);
+      }
+    }
+
+
   }
   catch(e){
     console.log(e);
