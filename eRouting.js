@@ -29,6 +29,7 @@ module.exports = class Erouting {
 
         if (req.method === 'POST') {
             return this.readDataPromise.then((data) => {
+                console.log('data',data)
                 const newId = Math.max(...this.dbArray.map(({ id }) => id)) + 1;
                 const objToCreate = { id: newId, e: JSON.parse(data) };
                 this.dbArray.push(objToCreate);
