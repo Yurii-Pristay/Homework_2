@@ -22,7 +22,7 @@ const server = http.createServer((req, res) => {
   try {
     //console.log(asdl); // try to call some error
 
-    // d route
+    // b route
     if (req.url === "/b" || req.url.startsWith("/b?")) {
       const b = new CrudSystem(dbArray,req);
       res.writeHead(200, {
