@@ -12,8 +12,6 @@ module.exports=class cCRUD{
             let data = '';
 
             req.on('data', chunk => {data += chunk});
-
-            console.log(data);
             
             req.on('end', () => res(data));
         })  
@@ -24,7 +22,7 @@ module.exports=class cCRUD{
 
             const { c } = JSON.parse(newData);
 
-            console.log(c);
+            //console.log(c);
 
             if (typeof(c) !== 'number'){
                 
@@ -43,7 +41,7 @@ module.exports=class cCRUD{
                 const objToCreate = { id: newId, c };
                 this.arr.push(objToCreate);
 
-                console.log(this.arr);
+                //console.log(this.arr);
                 return res.end(JSON.stringify(objToCreate));
             }
             
@@ -60,7 +58,7 @@ module.exports=class cCRUD{
         return this.promise.then((newData) => {
             const {  c, id: idft} = JSON.parse(newData);
 
-            console.log("newData : ",newData);
+            //console.log("newData : ",newData);
 
             const foundObject = this.arr.find(({id}) => id === idft);
             if(!foundObject ){
