@@ -1,6 +1,7 @@
 const http = require("http");
-const CrudSystem = require("./CrudSystem");
 
+const CrudForARoute = require("./CrudForARoute");
+const CrudSystem = require("./CrudSystem");
 const DCrud = require("./dCrud");
 const ECrud = require("./eRouting");
 const CCrud = require("./nastiiaCrud");
@@ -21,6 +22,25 @@ const server = http.createServer((req, res) => {
   // req.url -- get url
   try {
     //console.log(asdl); // try to call some error
+
+    //a route
+    if (req.url === "/a"  || req.url.startsWith("/a?")) {
+      const a = new CrudForARoute(dbArray,req);
+      res.writeHead(200, {
+        "Content-Type": "application/json",
+      });
+
+      if (req.method === "POST") {
+        a.POST(req, res);
+      } else if (req.method === "PUT") {
+        a.PUT(req,res);
+      } else if (req.method === "DELETE") {
+        a.DELETE(req, res);
+      } else if (req.method === "GET") {
+        a.GET(req,res);
+      }
+    }
+
 
     // b route
     if (req.url === "/b" || req.url.startsWith("/b?")) {
