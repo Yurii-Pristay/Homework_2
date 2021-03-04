@@ -3,19 +3,19 @@ exports.__esModule = true;
 exports.DCrud = void 0;
 var isCamelCase = function (msg) { return /[A-Z]/.test(msg.substring(1)); };
 var camelToSnake = function (msg) {
-    return msg.replace(/([a-z\d])([A-Z])/g, '$1_$2').toLowerCase();
+    return msg.replace(/([a-z\d])([A-Z])/g, "$1_$2").toLowerCase();
 };
 var isPalindrome = function (msg) {
-    return msg == msg.split('').reverse().join('');
+    return msg == msg.split("").reverse().join("");
 };
 var DCrud = /** @class */ (function () {
     function DCrud(dbArray, req) {
         this.dbArray = dbArray;
         this.readBufferPromise = new Promise(function (resolve, reject) {
-            var data = '';
+            var data = "";
             req
-                .on('data', function (chunk) { return (data += chunk.toString()); })
-                .on('end', function () { return resolve(data); });
+                .on("data", function (chunk) { return (data += chunk.toString()); })
+                .on("end", function () { return resolve(data); });
         });
     }
     DCrud.prototype.read = function (req, res) {
@@ -23,7 +23,7 @@ var DCrud = /** @class */ (function () {
             var d = _a.d;
             return d;
         });
-        if (req.url.includes('isPalindrome=true')) {
+        if (req.url.includes("isPalindrome=true")) {
             var dArrayPalindrome = dArray.map(function (item) {
                 var newItem = JSON.parse(JSON.stringify(item));
                 newItem.isPalindrome = isPalindrome(item.d);
@@ -53,7 +53,7 @@ var DCrud = /** @class */ (function () {
             var bodyObj = JSON.parse(data);
             var objToChange = _this.dbArray.find(function (item) { return item.id === bodyObj.id && item.d; });
             if (!objToChange) {
-                return res.end(JSON.stringify('Bad input values(either ID or D)'));
+                return res.end(JSON.stringify("Bad input values(either ID or D)"));
             }
             objToChange.d = bodyObj.d;
             return res.end(JSON.stringify(objToChange));
@@ -65,13 +65,12 @@ var DCrud = /** @class */ (function () {
             var bodyObj = JSON.parse(data);
             var indToRemove = _this.dbArray.findIndex(function (item) { return item.id === bodyObj.id && item.d; });
             if (indToRemove === -1) {
-                return res.end(JSON.stringify('No ID value given / No object with such ID'));
+                return res.end(JSON.stringify("No ID value given / No object with such ID"));
             }
             _this.dbArray.splice(indToRemove, 1);
-            return res.end(JSON.stringify('Object successfully deleted'));
+            return res.end(JSON.stringify("Object successfully deleted"));
         });
     };
     return DCrud;
 }());
 exports.DCrud = DCrud;
-;
