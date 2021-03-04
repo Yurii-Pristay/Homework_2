@@ -5,7 +5,7 @@ var http = require("http");
 // const CrudSystem = require("./CrudSystem");
 // const CCrud = require("./nastiiaCrud");
 var dRouter_1 = require("./d-route/dRouter");
-// const ECrud = require("./eRouting");
+var eRouter_1 = require("./eRouting/eRouter");
 var hostname = "127.0.0.1";
 var port = 3000;
 var dbArray = [
@@ -57,11 +57,9 @@ var server = http.createServer(function (req, res) {
             dRouter_1.dRoute(req, res, dbArray);
         }
         // e routing
-        // if (req.url === "/e" || req.url.startsWith("/e?")) {
-        //   res.writeHead(200, { "Content-Type": "application/json" });
-        //   const e = new ECrud(dbArray, req);
-        //   e.routing(req, res);
-        // }
+        if (req.url === "/e" || req.url.startsWith("/e?")) {
+            eRouter_1.eRouter(dbArray, req, res);
+        }
         // c CRUD
         //   if (req.url === "/c" || req.url.startsWith("/c?")) {
         //     const c = new CCrud(dbArray, req);
