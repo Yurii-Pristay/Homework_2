@@ -1,6 +1,7 @@
 import * as http from "http";
 
 import { dbObject } from "./interfaces";
+const CrudForARoute = require("./a- route/СrudForARoute");
 
 // const CrudForARoute = require("./CrudForARoute");
 // const CrudSystem = require("./CrudSystem");
@@ -26,22 +27,22 @@ const server = http.createServer((req, res) => {
     //console.log(asdl); // try to call some error
 
     //a route
-    // if (req.url === "/a"  || req.url.startsWith("/a?")) {
-    //   const a = new CrudForARoute(dbArray,req);
-    //   res.writeHead(200, {
-    //     "Content-Type": "application/json",
-    //   });
+    if (req.url === "/a"  || req.url.startsWith("/a?")) {
+      const a = new CrudForARoute(dbArray,req);
+      res.writeHead(200, {
+        "Content-Type": "application/json",
+      });
 
-    //   if (req.method === "POST") {
-    //     a.POST(req, res);
-    //   } else if (req.method === "PUT") {
-    //     a.PUT(req,res);
-    //   } else if (req.method === "DELETE") {
-    //     a.DELETE(req, res);
-    //   } else if (req.method === "GET") {
-    //     a.GET(req,res);
-    //   }
-    // }
+      if (req.method === "POST") {
+        a.POST(req, res);
+      } else if (req.method === "PUT") {
+        a.PUT(req,res);
+      } else if (req.method === "DELETE") {
+        a.DELETE(req, res);
+      } else if (req.method === "GET") {
+        a.GET(req,res);
+      }
+    }
 
     // // b route
     // if (req.url === "/b" || req.url.startsWith("/b?")) {
