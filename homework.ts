@@ -5,7 +5,7 @@ const CrudForARoute = require("./a- route/СrudForARoute");
 
 // const CrudForARoute = require("./CrudForARoute");
 // const CrudSystem = require("./CrudSystem");
-// const CCrud = require("./nastiiaCrud");
+const CCrud = require("./cRouting/nastiiaCrud");
 import { dRoute } from "./d-route/dRouter";
 import { eRouter } from "./eRouting/eRouter";
 
@@ -71,24 +71,24 @@ const server = http.createServer((req, res) => {
       eRouter(dbArray,req,res);
     }
 
-    // c CRUD
+    //c CRUD
 
-    //   if (req.url === "/c" || req.url.startsWith("/c?")) {
-    //     const c = new CCrud(dbArray, req);
-    //     res.writeHead(200, {
-    //       "Content-Type": "application/json",
-    //     });
+      if (req.url === "/c" || req.url.startsWith("/c?")) {
+        const c = new CCrud(dbArray, req);
+        res.writeHead(200, {
+          "Content-Type": "application/json",
+        });
 
-    //     if (req.method === "GET") {
-    //       c.read(req, res);
-    //     } else if (req.method === "POST") {
-    //       c.create(req, res);
-    //     } else if (req.method === "PUT") {
-    //       c.update(req, res);
-    //     } else if (req.method === "DELETE") {
-    //       c.delete(req, res);
-    //     }
-    //   }
+        if (req.method === "GET") {
+          c.read(req, res);
+        } else if (req.method === "POST") {
+          c.create(req, res);
+        } else if (req.method === "PUT") {
+          c.update(req, res);
+        } else if (req.method === "DELETE") {
+          c.delete(req, res);
+        }
+      }
   } catch (e) {
     console.log(e);
     res.writeHead(500, {

@@ -3,7 +3,7 @@ exports.__esModule = true;
 var http = require("http");
 // const CrudForARoute = require("./CrudForARoute");
 // const CrudSystem = require("./CrudSystem");
-// const CCrud = require("./nastiiaCrud");
+var CCrud = require("./cRouting/nastiiaCrud");
 var dRouter_1 = require("./d-route/dRouter");
 var eRouter_1 = require("./eRouting/eRouter");
 var hostname = "127.0.0.1";
@@ -57,6 +57,32 @@ var server = http.createServer(function (req, res) {
             dRouter_1.dRoute(req, res, dbArray);
         }
         // e routing
+<<<<<<< HEAD
+        // if (req.url === "/e" || req.url.startsWith("/e?")) {
+        //   res.writeHead(200, { "Content-Type": "application/json" });
+        //   const e = new ECrud(dbArray, req);
+        //   e.routing(req, res);
+        // }
+        //c CRUD
+        if (req.url === "/c" || req.url.startsWith("/c?")) {
+            var c = new CCrud(dbArray, req);
+            res.writeHead(200, {
+                "Content-Type": "application/json"
+            });
+            if (req.method === "GET") {
+                c.read(req, res);
+            }
+            else if (req.method === "POST") {
+                c.create(req, res);
+            }
+            else if (req.method === "PUT") {
+                c.update(req, res);
+            }
+            else if (req.method === "DELETE") {
+                c["delete"](req, res);
+            }
+        }
+=======
         if (req.url === "/e" || req.url.startsWith("/e?")) {
             eRouter_1.eRouter(dbArray, req, res);
         }
@@ -76,6 +102,7 @@ var server = http.createServer(function (req, res) {
         //       c.delete(req, res);
         //     }
         //   }
+>>>>>>> 282239156b4ec76a681353d68c557c426d49129b
     }
     catch (e) {
         console.log(e);
