@@ -13,7 +13,9 @@ export interface dObject {
   isPalindrome?: boolean
 };
 
-// export interface cRoute {
-//   id: number,
-//   c: number
-// }
+
+export interface aRoute {
+    id: number,
+    a: number[],
+};
+
