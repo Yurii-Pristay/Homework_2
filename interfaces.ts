@@ -12,3 +12,8 @@ export interface dObject {
   d: string,
   isPalindrome?: boolean
 };
+
+// export interface cRoute {
+//   id: number,
+//   c: number
+// }

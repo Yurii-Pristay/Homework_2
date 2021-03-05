@@ -3,7 +3,7 @@ exports.__esModule = true;
 var http = require("http");
 // const CrudForARoute = require("./CrudForARoute");
 // const CrudSystem = require("./CrudSystem");
-// const CCrud = require("./nastiiaCrud");
+var CCrud = require("./cRouting/nastiiaCrud");
 var dRouter_1 = require("./d-route/dRouter");
 // const ECrud = require("./eRouting");
 var hostname = "127.0.0.1";
@@ -62,22 +62,25 @@ var server = http.createServer(function (req, res) {
         //   const e = new ECrud(dbArray, req);
         //   e.routing(req, res);
         // }
-        // c CRUD
-        //   if (req.url === "/c" || req.url.startsWith("/c?")) {
-        //     const c = new CCrud(dbArray, req);
-        //     res.writeHead(200, {
-        //       "Content-Type": "application/json",
-        //     });
-        //     if (req.method === "GET") {
-        //       c.read(req, res);
-        //     } else if (req.method === "POST") {
-        //       c.create(req, res);
-        //     } else if (req.method === "PUT") {
-        //       c.update(req, res);
-        //     } else if (req.method === "DELETE") {
-        //       c.delete(req, res);
-        //     }
-        //   }
+        //c CRUD
+        if (req.url === "/c" || req.url.startsWith("/c?")) {
+            var c = new CCrud(dbArray, req);
+            res.writeHead(200, {
+                "Content-Type": "application/json"
+            });
+            if (req.method === "GET") {
+                c.read(req, res);
+            }
+            else if (req.method === "POST") {
+                c.create(req, res);
+            }
+            else if (req.method === "PUT") {
+                c.update(req, res);
+            }
+            else if (req.method === "DELETE") {
+                c["delete"](req, res);
+            }
+        }
     }
     catch (e) {
         console.log(e);
